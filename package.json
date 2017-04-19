@@ -1,0 +1,29 @@
+{
+  "name": "phaser-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "d": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liseen315/phaser-demo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liseen315/phaser-demo/issues"
+  },
+  "homepage": "https://github.com/liseen315/phaser-demo#readme",
+  "dependencies": {
+    "phaser-ce": "^2.7.6"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.8",
+    "browser-sync-webpack-plugin": "^1.1.4",
+    "ts-loader": "^2.0.3",
+    "typescript": "^2.2.2",
+    "webpack": "^2.4.1"
+  }
+}
