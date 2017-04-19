@@ -1,8 +1,9 @@
 import Hello from "./Hello";
 class Main extends Phaser.Game {
   constructor () {
-    super(400, 400, Phaser.CANVAS, 'content', null);
-    new Hello();
+    super(window.innerWidth*window.devicePixelRatio, window.innerHeight*window.devicePixelRatio, Phaser.AUTO, 'content', null);
+    console.log('->>>>',this.scale.scaleMode);
+    this.scale.scaleMode = Phaser.ScaleManager.RESIZE;
   }
 }
 
