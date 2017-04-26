@@ -1,16 +1,19 @@
 import Config from '../Config';
 export default class Facade extends Phaser.State {
   private loaderText: Phaser.Text;
+  private scaleRatio:number;
   constructor() {
     super();
   }
   public preload(): void {
-    this.game.scale.scaleMode = Phaser.ScaleManager.RESIZE;
-
+    this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    this.game.scale.pageAlignHorizontally = true;
+    this.game.scale.pageAlignVertically = true;
+    this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
     this.game.scale.forceOrientation(true, false);
     this.game.scale.enterIncorrectOrientation.add(this.handleIncorrect, this);
     this.game.scale.leaveIncorrectOrientation.add(this.handleCorrect, this);
-
+    this.scaleRatio = window.devicePixelRatio / 3;
     this.game.load.image(Config.preload.Bg, Config.staticPath + 'images/bg.jpg');
     this.game.load.onLoadComplete.add(this.loadCompleteHandler, this);
   }
@@ -21,7 +24,7 @@ export default class Facade extends Phaser.State {
   }
 
   private loadCompleteHandler(): void {
-    console.log('loadComplete!');
+    //console.log('loadComplete!');
   }
 
   private handleIncorrect(): void {
