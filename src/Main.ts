@@ -1,10 +1,12 @@
-import Hello from "./Hello";
+import Facade from './states/Facade'
+
 class Main extends Phaser.Game {
   constructor () {
-    super(window.innerWidth*window.devicePixelRatio, window.innerHeight*window.devicePixelRatio, Phaser.AUTO, 'content', null);
-    console.log('->>>>',this.scale.scaleMode);
-    this.scale.scaleMode = Phaser.ScaleManager.RESIZE;
+    super(window.innerWidth*window.devicePixelRatio, window.innerHeight*window.devicePixelRatio, Phaser.CANVAS, 'content', null);
+    this.state.add('Facade',Facade,false);
+    this.state.start('Facade');
   }
+
 }
 
 window.onload = () => {
