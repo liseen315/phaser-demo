@@ -1,15 +1,26 @@
 import Config from '../Config';
 export default class Facade extends Phaser.State {
-  private loaderText: Phaser.Text;
   private scaleRatio:number;
   constructor() {
     super();
   }
   public preload(): void {
-    this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    this.game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
     this.game.scale.pageAlignHorizontally = true;
     this.game.scale.pageAlignVertically = true;
-    this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+    this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.USER_SCALE;
+
+    let deviceW:number = window.innerWidth;
+    let deviceH:number = window.innerHeight;
+    let originW:number = 1136;
+    let originH:number = 640;
+
+    let scaleX = deviceW/originW;
+    let scaleY = deviceH/originH;
+
+    this.game.scale.setUserScale(scaleX,scaleY);
+    this.game.scale.refresh();
+
     this.game.scale.forceOrientation(true, false);
     this.game.scale.enterIncorrectOrientation.add(this.handleIncorrect, this);
     this.game.scale.leaveIncorrectOrientation.add(this.handleCorrect, this);
