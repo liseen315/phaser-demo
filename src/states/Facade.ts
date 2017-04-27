@@ -27,11 +27,12 @@ export default class Facade extends Phaser.State {
     this.scaleRatio = window.devicePixelRatio / 3;
     this.game.load.image(Config.preload.Bg, Config.staticPath + 'images/bg.jpg');
     this.game.load.onLoadComplete.add(this.loadCompleteHandler, this);
+
   }
 
   public create(): void {
-    this.game.stage.backgroundColor = "#4488AA";
     this.game.add.image(0, 0, Config.preload.Bg).anchor.set(0);
+    console.log(this.stage.width,this.world.width,this.stage.height,this.world.height);
   }
 
   private loadCompleteHandler(): void {
