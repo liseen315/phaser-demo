@@ -9,7 +9,7 @@ export default class Facade extends Phaser.State {
     this.game.scale.pageAlignHorizontally = true;
     this.game.scale.pageAlignVertically = true;
     this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.USER_SCALE;
-
+    this.game.time.advancedTiming = true;
     let deviceW:number = window.innerWidth;
     let deviceH:number = window.innerHeight;
     let originW:number = 1136;

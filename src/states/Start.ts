@@ -46,10 +46,14 @@ export default class Start extends Phaser.State {
 
     this.game.physics.p2.updateBoundsCollisionGroup();
 
-    this.game.time.events.loop(1500, () => {
+    this.game.time.events.loop(2500, () => {
       this.spawnObjectLeft();
       this.spawnObjectRight();
     })
+  }
+
+  public render():void{
+    this.game.debug.text('FPS: ' + this.game.time.fps || '--', 20, 20);   
   }
 
   public update(): void {
@@ -60,7 +64,7 @@ export default class Start extends Phaser.State {
     let objects = this.game.add.group();
     objects.enableBody = true;
     objects.physicsBodyType = Phaser.Physics.P2JS;
-    objects.createMultiple(40, objectName);
+    objects.createMultiple(25, objectName);
 
     objects.forEach((child: any) => {
       child.body.clearShapes();
@@ -73,7 +77,6 @@ export default class Start extends Phaser.State {
   private spawnObjectLeft(): void {
     var object = this.spawnObject();
 
-    // Set object's position and velocity
     object.reset(1, 600);
     object.body.velocity.x = this._random.integerInRange(100, 800);
     object.body.velocity.y = -this._random.integerInRange(1000, 1500);
@@ -82,7 +85,6 @@ export default class Start extends Phaser.State {
   private spawnObjectRight(): void {
     var object = this.spawnObject();
 
-    // Set object's position and velocity
     object.reset(this.game.world.width, 600);
     object.body.velocity.x = -this._random.integerInRange(100, 800);
     object.body.velocity.y = -this._random.integerInRange(1000, 1500);
@@ -107,15 +109,12 @@ export default class Start extends Phaser.State {
     }
 
     // set the lifespan
-    object.lifespan = 6000;
+    object.lifespan = 2000;
 
     // Fruits collide with fruit and the player
     object.body.collides([
       this._blockCollisionGroup,
-      this._playerCollisionGroup,
-      this._bananasCollisionGroup,
-      this._cherriesCollisionGroup,
-      this._pineapplesCollisionGroup
+      this._playerCollisionGroup
     ]);
 
     return object;
@@ -158,15 +157,10 @@ export default class Start extends Phaser.State {
     this._ropeBitmapData.ctx.lineWidth = 4;
     this._ropeBitmapData.ctx.strokeStyle = "#ffffff";
     this._ropeBitmapData.ctx.stroke();
-
-    // Create a new sprite using the bitmap data
     this._line = this.game.add.sprite(0, 0, this._ropeBitmapData);
-
-    // Keep track of where the rope is anchored
     this._ropeAnchorX = (this._block.world.x + 500);
     this._ropeAnchorY = (this._block.world.y + this._block.height);
 
-    // Create a spring between the player and block to act as the rope
     this._rope = this.game.physics.p2.createSpring(
       this._block,  // sprite 1
       this._player, // sprite 2
@@ -175,8 +169,6 @@ export default class Start extends Phaser.State {
       3,         // damping
       [-(this._block.world.x + 500), -(this._block.world.y + this._block.height)]
     );
-
-    // Draw a line from the player to the block to visually represent the spring
     this.line = new Phaser.Line(this._player.x, this._player.y,
       (this._block.world.x + 500), (this._block.world.y + this._block.height));
   }
