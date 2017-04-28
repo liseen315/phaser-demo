@@ -26,17 +26,21 @@ export default class Facade extends Phaser.State {
     this.game.scale.leaveIncorrectOrientation.add(this.handleCorrect, this);
     this.scaleRatio = window.devicePixelRatio / 3;
     this.game.load.image(Config.preload.Bg, Config.staticPath + 'images/bg.jpg');
+    this.game.load.image(Config.preload.betty,Config.staticPath + 'images/betty.png');
+    this.game.load.image(Config.preload.pineapple,Config.staticPath + 'images/pineapple.png');
+    this.game.load.image(Config.preload.banana,Config.staticPath + 'images/banana.png');
+    this.game.load.image(Config.preload.cherries,Config.staticPath + 'images/cherries.png');
+    this.game.load.physics(Config.preload.sprite_physics,Config.staticPath + 'images/sprite_physics.json');
     this.game.load.onLoadComplete.add(this.loadCompleteHandler, this);
 
   }
 
   public create(): void {
-    this.game.add.image(0, 0, Config.preload.Bg).anchor.set(0);
-    console.log(this.stage.width,this.world.width,this.stage.height,this.world.height);
+    this.state.start('Start');
   }
 
   private loadCompleteHandler(): void {
-    //console.log('loadComplete!');
+    console.log('loadComplete!');
   }
 
   private handleIncorrect(): void {
