@@ -18762,9 +18762,11 @@ declare module Phaser {
         * @param baseTexture The BaseTexture this font uses.
         * @param xSpacing Additional horizontal spacing between the characters.
         * @param ySpacing Additional vertical spacing between the characters.
+        * @param frame Optional Frame, if this font is embedded in a texture atlas.
+        * @param resolution Optional game resolution to apply to the kerning data. - Default: 1
         * @return The parsed Bitmap Font data.
         */
-        static bitmapFont(xml: any, baseTexture: PIXI.BaseTexture, xSpacing?: number, ySpacing?: number): any;
+        static bitmapFont(xml: any, baseTexture: PIXI.BaseTexture, xSpacing?: number, ySpacing?: number, frame?: Phaser.Frame, resolution?: number): any;
 
         /**
         * Parse a Bitmap Font from an XML file.
@@ -18774,10 +18776,10 @@ declare module Phaser {
         * @param xSpacing Additional horizontal spacing between the characters.
         * @param ySpacing Additional vertical spacing between the characters.
         * @param frame Optional Frame, if this font is embedded in a texture atlas.
-        * @param resolution Optional game resolution to apply to the kerning data.
+        * @param resolution Optional game resolution to apply to the kerning data. - Default: 1
         * @return The parsed Bitmap Font data.
         */
-        static xmlBitmapFont(xml: any, baseTexture: PIXI.BaseTexture, xSpacing?: number, ySpacing?: number, frame?: Phaser.Frame): any;
+        static xmlBitmapFont(xml: any, baseTexture: PIXI.BaseTexture, xSpacing?: number, ySpacing?: number, frame?: Phaser.Frame, resolution?: number): any;
 
         /**
         * Parse a Bitmap Font from a JSON file.
@@ -18787,10 +18789,10 @@ declare module Phaser {
         * @param xSpacing Additional horizontal spacing between the characters.
         * @param ySpacing Additional vertical spacing between the characters.
         * @param frame Optional Frame, if this font is embedded in a texture atlas.
-        * @param resolution Optional game resolution to apply to the kerning data.
+        * @param resolution Optional game resolution to apply to the kerning data. - Default: 1
         * @return The parsed Bitmap Font data.
         */
-        static jsonBitmapFont(json: any, baseTexture: PIXI.BaseTexture, xSpacing?: number, ySpacing?: number, frame?: Phaser.Frame): any;
+        static jsonBitmapFont(json: any, baseTexture: PIXI.BaseTexture, xSpacing?: number, ySpacing?: number, frame?: Phaser.Frame, resolution?: number): any;
 
     }
 
@@ -20165,7 +20167,9 @@ declare module Phaser {
         remove(emitter: Phaser.Particles.Arcade.Emitter): void;
 
         /**
-        * Called by the core game loop. Updates all Emitters who have their exists value set to true.
+        * Updates all Emitters who have their exists value set to true.
+        * 
+        * Phaser no longer uses this method; Emitters receive updates via {@link Phaser.Stage#update} instead.
         */
         update(): void;
 
@@ -35724,7 +35728,7 @@ declare module Phaser {
         * @param context The context in which the callback will be called.
         * @param onEnd Will the callback fire on a touchstart (default) or touchend event?
         */
-        addTouchLockCallback(callback: Function, context?: any, onEnd?: Function): void;
+        addTouchLockCallback(callback: Function, context?: any, onEnd?: boolean): void;
 
         /**
         * Removes the callback at the defined index from the Phaser.Touch.touchLockCallbacks array
